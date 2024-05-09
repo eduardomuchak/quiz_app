@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:quiz_app/src/questions_summary/question_identifier.dart';
 
 class SummaryItem extends StatelessWidget {
-  const SummaryItem(this.itemData, this.questionIndex, {super.key});
+  const SummaryItem(this.itemData, {super.key});
 
   final Map<String, Object> itemData;
-  final int questionIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class SummaryItem extends StatelessWidget {
         children: [
           QuestionIdentifier(
             isCorrectAnswer: isCorrectAnswer,
-            questionIndex: questionIndex,
+            questionIndex: itemData['question_index'] as int,
           ),
           const SizedBox(width: 20),
           Expanded(

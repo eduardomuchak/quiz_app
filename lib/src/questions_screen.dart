@@ -8,13 +8,9 @@ class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({
     super.key,
     required this.onSelectAnswer,
-    required this.onRestart,
-    required this.onQuizFinished,
   });
 
   final void Function(String answer) onSelectAnswer;
-  final void Function() onRestart;
-  final void Function() onQuizFinished;
 
   @override
   State<QuestionsScreen> createState() {
@@ -27,21 +23,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   void answerQuestion(String selectedAnswer) {
     widget.onSelectAnswer(selectedAnswer);
+    // currentQuestionIndex = currentQuestionIndex + 1;
+    // currentQuestionIndex += 1;
     setState(() {
-      if (currentQuestionIndex < questions.length) {
-        currentQuestionIndex++; // increments the value by 1
-      } else {
-        currentQuestionIndex = 0;
-        widget.onRestart();
-      }
+      currentQuestionIndex++; // increments the value by 1
     });
-  }
-
-  void restartQuiz() {
-    setState(() {
-      currentQuestionIndex = 0;
-    });
-    widget.onRestart();
   }
 
   @override
