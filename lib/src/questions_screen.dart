@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:quiz_app/answer_button.dart';
-import 'package:quiz_app/data/questions.dart';
+import 'package:quiz_app/src/answer_button.dart';
+import 'package:quiz_app/src/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({
     super.key,
     required this.onSelectAnswer,
+    required this.onRestart,
+    required this.onQuizFinished,
   });
 
   final void Function(String answer) onSelectAnswer;
+  final void Function() onRestart;
+  final void Function() onQuizFinished;
 
   @override
   State<QuestionsScreen> createState() {
@@ -23,11 +27,21 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   void answerQuestion(String selectedAnswer) {
     widget.onSelectAnswer(selectedAnswer);
-    // currentQuestionIndex = currentQuestionIndex + 1;
-    // currentQuestionIndex += 1;
     setState(() {
-      currentQuestionIndex++; // increments the value by 1
+      if (currentQuestionIndex < questions.length) {
+        currentQuestionIndex++; // increments the value by 1
+      } else {
+        currentQuestionIndex = 0;
+        widget.onRestart();
+      }
     });
+  }
+
+  void restartQuiz() {
+    setState(() {
+      currentQuestionIndex = 0;
+    });
+    widget.onRestart();
   }
 
   @override

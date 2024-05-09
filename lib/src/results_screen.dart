@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:quiz_app/data/questions.dart';
-import 'package:quiz_app/questions_summary/questions_summary.dart';
+import 'package:quiz_app/src/data/questions.dart';
+import 'package:quiz_app/src/questions_summary/questions_summary.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultsScreen extends StatelessWidget {
@@ -9,10 +9,12 @@ class ResultsScreen extends StatelessWidget {
     super.key,
     required this.chosenAnswers,
     required this.onRestart,
+    required this.onQuizFinished,
   });
 
   final void Function() onRestart;
   final List<String> chosenAnswers;
+  final void Function() onQuizFinished;
 
   List<Map<String, Object>> get summaryData {
     final List<Map<String, Object>> summary = [];
